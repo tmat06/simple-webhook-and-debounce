@@ -1,25 +1,40 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import axios from "axios";
+import _ from "lodash";
 
 class App extends Component {
+  state = {
+    message: "",
+    color: "blue"
+  };
+  handleClick() {
+    axios
+      .post("/zap", { message: this.state.message })
+      .then(response => console.log(response.data));
+  }
+
+  handleColor = () => {
+    console.log("runs?");
+    if (this.state.color === "blue") {
+      this.setState({ color: "yellow" });
+    } else {
+      this.setState({ color: "blue" });
+    }
+  };
+
   render() {
+    const debounced = _.debounce(this.handleColor, 2000);
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="container">
+        <div>Webhooks</div>
+        <div>This message will be sent to timmy.a.matthews@gmail.com</div>
+        <input onChange={e => this.setState({ message: e.target.value })} />
+        <button onClick={() => this.handleClick()}>Send</button>
+        <br />
+        <div>Debounce</div>
+        <div style={{ color: this.state.color }}>Color</div>
+        <button onClick={debounced}>Stop Changing</button>
       </div>
     );
   }

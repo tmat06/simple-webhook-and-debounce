@@ -2,7 +2,13 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
+  "main": "server/server.js",
+  "proxy": "http://localhost:3333",
   "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1"
