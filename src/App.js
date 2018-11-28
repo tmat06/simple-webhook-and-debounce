@@ -16,6 +16,7 @@ class App extends Component {
 
   handleColor = () => {
     console.log("runs?");
+    console.log("nothing");
     if (this.state.color === "blue") {
       this.setState({ color: "yellow" });
     } else {
